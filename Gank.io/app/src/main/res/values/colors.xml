@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4D6992</color>
+    <color name="colorPrimaryDark">#375683</color>
+    <color name="colorAccent">#FFFF8C</color>
+
+
+    <color name="textColorWhite">#FFFFFF</color>
+    <color name="textColorBlack">#FF000000</color>
+    <color name="textColorLight">#DE4A4A4A</color>
+    <color name="textColorBackground">#6B000000</color>
+    <color name="textColorLoadMore">#DE4A4A4A</color>
+    <color name="placeholder">#de666666</color>
+    <color name="recyclerViewDivider">#3D4A4A4A</color>
+    <color name="glideLoading">#cacaca</color>
+
+</resources>
