@@ -92,15 +92,24 @@ public class LoadDataTryFromCache {
 
     public Observable<List<Results>> subscribeData(final String type, final int number, final int page) {
 
-        List<Results> items = CacheUtils.getInstance().readItems(type);
-        if (items.size() == 0) {
+        //由于只缓存了第一批数据,所以加载第一页数据的时候尝试从缓存获取,否则直接从网络请求
+        if (page == 1) {
+            //尝试从缓存库读取
+            List<Results> items = CacheUtils.getInstance().readItems(type);
+            if (items.size() == 0) {
+                //缓存数据被删除,则从网络获取
+                setDataSource(DATA_SOURCE_NETWORK);
+                return loadFromNetwork(type, number, page);
+            } else {
+                setDataSource(DATA_SOURCE_DISK);
+                return Observable.from(items).toList().subscribeOn(Schedulers.io());
+            }
+        } else {
+            //直接从网络获取
             setDataSource(DATA_SOURCE_NETWORK);
             return loadFromNetwork(type, number, page);
-
-        } else {
-            setDataSource(DATA_SOURCE_DISK);
-            return Observable.from(items).toList().subscribeOn(Schedulers.io());
         }
+
 
     }
 

@@ -45,17 +45,11 @@ public class MainActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 switch (position) {
                     case 0:
-                        DataFragment dataFragment = new DataFragment();
-                        dataFragment.setDataType(GankApi.TYPE_ANDROID);
-                        return dataFragment;
+                        return DataFragment.newInstance(GankApi.TYPE_ANDROID);
                     case 1:
-                        DataFragment iosFragment = new DataFragment();
-                        iosFragment.setDataType(GankApi.TYPE_IOS);
-                        return iosFragment;
+                        return DataFragment.newInstance(GankApi.TYPE_IOS);
                     case 2:
-                        DataFragment frontEndFragment = new DataFragment();
-                        frontEndFragment.setDataType(GankApi.TYPE_FRONT_END);
-                        return frontEndFragment;
+                        return DataFragment.newInstance(GankApi.TYPE_FRONT_END);
                 }
                 return null;
             }

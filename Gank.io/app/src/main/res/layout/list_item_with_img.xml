@@ -7,7 +7,7 @@
 
 
     <com.jude.rollviewpager.RollPagerView
-        android:id="@+id/roll_pager_view"
+        android:id="@+id/with_img_roll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"

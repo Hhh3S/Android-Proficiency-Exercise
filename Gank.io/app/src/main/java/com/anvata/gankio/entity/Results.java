@@ -1,5 +1,7 @@
 package com.anvata.gankio.entity;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
@@ -12,8 +14,11 @@ import java.util.List;
  */
 
 @Entity
-public class Results {
+public class Results implements MultiItemEntity {
 
+
+    public static final int TYPE_PURE_TEXT = 1;
+    public static final int TYPE_WITH_IMG = 2;
     @Id
     private String _id;
 
@@ -137,4 +142,10 @@ public class Results {
     }
 
 
+    @Override
+    public int getItemType() {
+        if (getImages() != null && getImages().size() > 0)
+            return TYPE_WITH_IMG;
+        return TYPE_PURE_TEXT;
+    }
 }

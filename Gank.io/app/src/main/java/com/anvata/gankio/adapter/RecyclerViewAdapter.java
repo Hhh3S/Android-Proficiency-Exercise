@@ -197,7 +197,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView author;
         @BindView(R.id.with_img_time)
         TextView time;
-        @BindView(R.id.roll_pager_view)
+        @BindView(R.id.with_img_roll_view)
         RollPagerView rollPagerView;
         @BindView(R.id.with_img_img)
         ImageView imageView;

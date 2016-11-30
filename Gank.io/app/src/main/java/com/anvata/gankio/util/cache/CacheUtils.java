@@ -68,9 +68,8 @@ public class CacheUtils {
     public void writeItems(List<Results> items) {
         Log.i(TAG, "writeItems: 开始缓存数据");
 
-
         for (Results item : items) {
-            mResultsDao.insert(item);
+            mResultsDao.insertOrReplace(item);
 
             List<String> images = item.getImages();
             //序列化images成json串 保存到数据库
@@ -82,8 +81,10 @@ public class CacheUtils {
 
     }
 
+    /**
+     * 清除缓存数据
+     */
     public void delete() {
         mResultsDao.deleteAll();
-
     }
 }
