@@ -13,5 +13,7 @@
     <color name="placeholder">#de666666</color>
     <color name="recyclerViewDivider">#3D4A4A4A</color>
     <color name="glideLoading">#cacaca</color>
+    <color name="colorPintHintFocus">#FFFFFFFF</color>
+    <color name="colorPintHintNormal">#80FFFFFF</color>
 
 </resources>

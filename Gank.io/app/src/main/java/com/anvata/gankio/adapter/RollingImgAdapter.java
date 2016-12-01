@@ -1,13 +1,11 @@
 package com.anvata.gankio.adapter;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.anvata.gankio.util.ImageLoader;
-import com.jude.rollviewpager.RollPagerView;
-import com.jude.rollviewpager.adapter.LoopPagerAdapter;
+import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 
 import java.util.List;
 
@@ -15,11 +13,10 @@ import java.util.List;
  * 轮播图适配器
  */
 
-public class RollingImgAdapter extends LoopPagerAdapter {
+public class RollingImgAdapter extends StaticPagerAdapter {
     private List<String> imgUrls;
 
-    public RollingImgAdapter(RollPagerView viewPager, List<String> imgUrls, Context context) {
-        super(viewPager);
+    public RollingImgAdapter(List<String> imgUrls) {
         this.imgUrls = imgUrls;
     }
 
@@ -31,9 +28,9 @@ public class RollingImgAdapter extends LoopPagerAdapter {
         return view;
     }
 
+
     @Override
-    public int getRealCount() {
+    public int getCount() {
         return imgUrls.size();
     }
-
 }

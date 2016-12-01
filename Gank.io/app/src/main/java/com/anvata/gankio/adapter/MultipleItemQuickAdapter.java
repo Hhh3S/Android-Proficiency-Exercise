@@ -1,10 +1,10 @@
 package com.anvata.gankio.adapter;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.anvata.gankio.DetailActivity;
 import com.anvata.gankio.R;
@@ -24,53 +24,57 @@ import java.util.List;
 
 public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Results, BaseViewHolder> {
 
-
-    //mData  父类的父类的不知道几级父类中的属性
     public MultipleItemQuickAdapter(List<Results> data) {
         super(data);
         addItemType(Results.TYPE_PURE_TEXT, R.layout.list_item_pure_text);
         addItemType(Results.TYPE_WITH_IMG, R.layout.list_item_with_img);
+
     }
 
 
     @Override
-    protected void convert(final BaseViewHolder helper, final Results item) {
+    protected void convert(final BaseViewHolder viewHolder, final Results item) {
 
-        final int layoutPosition = helper.getLayoutPosition();
+        final int layoutPosition = viewHolder.getLayoutPosition();
 
-        helper.itemView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 startDetailActivity(mData.get(layoutPosition));
             }
         });
-        switch (helper.getItemViewType()) {
+        switch (viewHolder.getItemViewType()) {
             case Results.TYPE_PURE_TEXT:
-                helper.setText(R.id.pure_text_title, item.getDesc());
-                helper.setText(R.id.pure_text_author, item.getWho());
-                helper.setText(R.id.pure_text_time, item.getPublishedAt().substring(0, 10));
+                viewHolder.setText(R.id.pure_text_title, item.getDesc())
+                        .setText(R.id.pure_text_author, item.getWho())
+                        .setText(R.id.pure_text_time, item.getPublishedAt().substring(0, 10));
                 break;
             case Results.TYPE_WITH_IMG:
-                TextView title = helper.getView(R.id.with_img_title);
-                TextView author = helper.getView(R.id.with_img_author);
-                TextView time = helper.getView(R.id.with_img_time);
-                RollPagerView rollPagerView = helper.getView(R.id.with_img_roll_view);
-                ImageView imageView = helper.getView(R.id.with_img_img);
 
-                title.setText(item.getDesc());
-                author.setText(item.getWho());
-                time.setText(item.getPublishedAt().substring(0, 10));
+                RollPagerView rollPagerView = viewHolder.getView(R.id.with_img_roll_view);
+                ImageView imageView = viewHolder.getView(R.id.with_img_img);
+                FrameLayout img_bg = viewHolder.getView(R.id.with_img_text_bg);
+
+                viewHolder.setText(R.id.with_img_title, item.getDesc())
+                        .setText(R.id.with_img_author, item.getWho())
+                        .setText(R.id.with_img_time, item.getPublishedAt().substring(0, 10));
                 int imgCounts = item.getImages().size();
-                if (imgCounts == 1) {
+                Log.i(TAG, "convert:标题: " + item.getDesc() + "  imgCounts==" + imgCounts);
+                if (imgCounts < 2) {
                     imageView.setVisibility(View.VISIBLE);
                     rollPagerView.setVisibility(View.GONE);
+                    img_bg.setVisibility(View.VISIBLE);
                     ImageLoader.LoadImage(imageView, item.getImages().get(0));
+                    //不显示指示器
+                    //rollPagerView.setHintView(null);
                 } else {
                     imageView.setVisibility(View.GONE);
+                    img_bg.setVisibility(View.GONE);
                     rollPagerView.setVisibility(View.VISIBLE);
-                    rollPagerView.setHintView(new ColorPointHintView(mContext, Color.RED, Color.WHITE));
-                    rollPagerView.setAdapter(new RollingImgAdapter(rollPagerView, item.getImages(), mContext));
+                    rollPagerView.setHintView(new ColorPointHintView(mContext, mContext.getResources().getColor(R.color.colorPintHintFocus),
+                            mContext.getResources().getColor(R.color.colorPintHintNormal)));
+                    rollPagerView.setAdapter(new RollingImgAdapter(item.getImages()));
+
 
                     rollPagerView.setOnItemClickListener(new OnItemClickListener() {
                         @Override
@@ -91,4 +95,5 @@ public class MultipleItemQuickAdapter extends BaseMultiItemQuickAdapter<Results,
         intent.putExtra("title", results.getDesc());
         mContext.startActivity(intent);
     }
+
 }

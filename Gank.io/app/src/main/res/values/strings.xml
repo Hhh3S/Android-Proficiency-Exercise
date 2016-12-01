@@ -7,9 +7,10 @@
     <string name="data_source_disk">磁盘</string>
     <string name="data_source_network">网络</string>
 
-    <string name="load_more">上拉加载更多...</string>
-    <string name="load_more_loading">正在加载更多数据...</string>
-    <string name="no_more_data">没有更多数据</string>
+    <string name="load_more_loading">加载更多...</string>
+    <string name="load_more_no_more_data">没有更多数据</string>
+    <string name="load_more_load_failed">加载失败，请点我重试</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

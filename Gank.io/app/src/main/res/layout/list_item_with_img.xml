@@ -2,42 +2,61 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="190dp"
                 android:orientation="vertical">
 
+    <!--app:rollviewpager_hint_paddingRight="16dp"-->
 
     <com.jude.rollviewpager.RollPagerView
         android:id="@+id/with_img_roll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         app:rollviewpager_hint_gravity="center"
-        app:rollviewpager_hint_paddingBottom="16dp"
-        app:rollviewpager_hint_paddingRight="16dp"
-        app:rollviewpager_play_delay="3000"/>
+        app:rollviewpager_hint_paddingBottom="15dp"
+        app:rollviewpager_play_delay="3000">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/bg_item_with_img">
+        </FrameLayout>
+
+    </com.jude.rollviewpager.RollPagerView>
+
 
     <ImageView
         android:id="@+id/with_img_img"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/with_img_text_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_item_with_img"
+        android:visibility="gone">
+    </FrameLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/textColorBackground"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:orientation="vertical"
         android:paddingBottom="12dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="16dp"
-        >
+        android:paddingTop="16dp">
 
         <TextView
             android:id="@+id/with_img_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@color/textColorWhite"
             android:textSize="14sp"/>
 

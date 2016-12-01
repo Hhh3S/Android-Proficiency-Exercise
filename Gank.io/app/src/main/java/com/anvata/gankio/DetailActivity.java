@@ -15,6 +15,8 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.anvata.gankio.util.SizeUtils;
+
 import java.io.File;
 
 import butterknife.BindView;
@@ -39,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         toolBar.setTitle(getIntent().getStringExtra("title"));
-        toolBar.setTitleMarginEnd(50);
+        toolBar.setTitleMarginEnd(SizeUtils.dp2px(this,50));
         setSupportActionBar(toolBar);
         toolBar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
         toolBar.setNavigationOnClickListener(new View.OnClickListener() {

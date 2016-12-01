@@ -71,7 +71,7 @@ public class LoadDataTryFromCache {
         return App.getInstance().getString(dataSourceTextRes);
     }
 
-    private Observable<List<Results>> loadFromNetwork(final String type, int number, int page) {
+    private Observable<List<Results>> loadFromNetwork(final String type, int number, final int page) {
         Log.i(TAG, "loadFromNetwork: ");
         return NetWork.getGankApi()
                 .getData(type, number, page)
@@ -81,13 +81,16 @@ public class LoadDataTryFromCache {
                         return root.getResults();
                     }
                 })
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.newThread()) //指定doOnNext执行线程是新线程
                 .doOnNext(new Action1<List<Results>>() {
                     @Override
                     public void call(List<Results> list) {
-                        CacheUtils.getInstance().writeItems(list);
+                        if (page == 1)//第一页
+                            CacheUtils.getInstance().writeItems(list);
                     }
-                })
-                .subscribeOn(Schedulers.io());
+                });
+
     }
 
     public Observable<List<Results>> subscribeData(final String type, final int number, final int page) {
